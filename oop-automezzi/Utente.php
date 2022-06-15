@@ -1,6 +1,8 @@
 <?php
+require_once __DIR__ ."/Indirizzo.php";
 
 class Utente {
+    use Indirizzo;
 
     public $name;
     public $email;
@@ -14,13 +16,12 @@ class Utente {
 
     // aggiunge un prodotto al carello, se disponibile
     // $_product -> un prodotto di tipo Veicolo
-    // return true se aggiunge, false altrimenti
+    // return void
     function addProductToCart($_product) {
         if ($_product->disponibile) {
             $this->cart[] = $_product;
-            return true;
         } else {
-            return false;
+            throw new Exception("Prodotto non disponibile");
         }
     }
 

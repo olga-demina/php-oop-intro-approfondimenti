@@ -20,14 +20,17 @@ $davide->addProductToCart($fiat_punto);
 
 $beverly->disponibile = false;
 
-$result = $davide->addProductToCart($beverly);
-if ($result) {
-    echo "Beverly aggiunta";
-} else {
-    echo "Beverly non è più disponibile";
+try {
+    $davide->addProductToCart($beverly);
+} catch (Exception $e) {
+    // Mandare email al manager e sviluppatore;
+    var_dump($e->getMessage());
+    echo "E' avvenuto un errore inaspettato";
 }
 
+$davide->setIndirizzo("Italia", "Roma", "14");
 var_dump($davide);
+echo $davide->printIndirizzo();
 
 
 ?>
